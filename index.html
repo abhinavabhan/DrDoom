@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AI Couple Generator</title>
+</head>
+
+<body>
+
+<h2>Upload Two Photos</h2>
+
+<input type="file" id="photoA"><br><br>
+<input type="file" id="photoB"><br><br>
+
+<button onclick="generate()">Generate Couple Photo</button>
+
+<br><br>
+
+<img id="result" width="400"/>
+
+<script>
+
+async function generate(){
+
+const response = await fetch("/api/generate",{
+method:"POST"
+})
+
+const blob = await response.blob()
+
+document.getElementById("result").src = URL.createObjectURL(blob)
+
+}
+
+</script>
+
+</body>
+
+</html>
