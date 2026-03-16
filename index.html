@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 <title>AI Couple Generator</title>
 </head>
 
 <body>
 
-<h2>Upload Two Photos</h2>
+<h1>Upload Two Photos</h1>
 
-<input type="file" id="photoA"><br><br>
-<input type="file" id="photoB"><br><br>
+<input type="file" id="photo1"><br><br>
+<input type="file" id="photo2"><br><br>
 
 <button onclick="generate()">Generate Couple Photo</button>
 
@@ -22,18 +21,29 @@
 
 async function generate(){
 
+const img = document.getElementById("result")
+
+img.src = "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+
+try{
+
 const response = await fetch("/api/generate",{
 method:"POST"
 })
 
 const blob = await response.blob()
 
-document.getElementById("result").src = URL.createObjectURL(blob)
+img.src = URL.createObjectURL(blob)
+
+}catch(e){
+
+alert("Generation failed")
+
+}
 
 }
 
 </script>
 
 </body>
-
 </html>
